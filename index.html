@@ -15,6 +15,7 @@
         canvas.width = 480;
         canvas.height = 320;
         let x = 150;
+        let y = 150;
         let t0;
         let dt;
         requestAnimationFrame(desenha); //Coloca a função desenha pra rodar
@@ -29,10 +30,11 @@
 
             //Atualiza estado
             x = x + 10*dt; // dt precisa ser sempre levado em conta para a mudança de estado
+            y = y + 20*dt;
 
             //Desenha Elementos
             ctx.fillStyle = "white"; //define a cor do retângulo pra branco
-            ctx.fillRect(x, 150, 20, 20);
+            ctx.fillRect(x, y, 20, 20);
 
             requestAnimationFrame(desenha);
             t0 = t;
