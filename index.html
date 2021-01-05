@@ -27,11 +27,12 @@
             ctx.fillRect(0, 0, canvas.width, canvas.height);
             //ctx.fillRect(10, 30, 40, 50); //cria um retângulo na posição x=10, y=30, com 40 pixels de largura e 50 de altura
 
+            //Atualiza estado
+            x = x + 10*dt; // dt precisa ser sempre levado em conta para a mudança de estado
+
             //Desenha Elementos
             ctx.fillStyle = "white"; //define a cor do retângulo pra branco
             ctx.fillRect(x, 150, 20, 20);
-
-            x = x + 1;
 
             requestAnimationFrame(desenha);
             t0 = t;
