@@ -10,9 +10,15 @@
     <canvas></canvas>
     <p> por Gabriel Santana (2021)</p>
     <script>
-        let canvas = document.querySelector("canvas");
+        let canvas = document.querySelector("canvas"); //captura do canvas
+        let ctx = canvas.getContext("2d"); //cria contexto 2d
         canvas.width = 480;
         canvas.height = 320;
+
+        ctx.fillStyle = "black"; //define a cor do retângulo pra preto
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        //ctx.fillRect(10, 30, 40, 50); //cria um retângulo na posição x=10, y=30, com 40 pixels de largura e 50 de altura
+
     </script>
 </body>
 </html>
