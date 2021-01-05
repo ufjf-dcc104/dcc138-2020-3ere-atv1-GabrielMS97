@@ -15,9 +15,13 @@
         canvas.width = 480;
         canvas.height = 320;
         let x = 150;
-        desenha(); //Cria o desenho inicial
+        let t0;
+        let dt;
+        requestAnimationFrame(desenha); //Coloca a função desenha pra rodar
 
-        function desenha(){
+        function desenha(t){
+            t0 = t0 ?? t; 
+            dt = (t - t0) / 1000; // 1/dt =~ frames por segundo
             //Desenha fundo
             ctx.fillStyle = "black"; //define a cor do retângulo pra preto
             ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -26,10 +30,13 @@
             //Desenha Elementos
             ctx.fillStyle = "white"; //define a cor do retângulo pra branco
             ctx.fillRect(x, 150, 20, 20);
+
+            x = x + 1;
+
+            requestAnimationFrame(desenha);
+            t0 = t;
         }
         
-
-
 
     </script>
 </body>
