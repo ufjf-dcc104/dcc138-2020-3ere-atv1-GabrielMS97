@@ -14,14 +14,18 @@
         let ctx = canvas.getContext("2d"); //cria contexto 2d
         canvas.width = 880;
         canvas.height = 420;
-        let x1 = 50;
+        let x = 50;
+        let vx = 0; //velocidade de x
+        let y = 100;
+        let vy = 0; //velocidade de y
+        /*let x1 = 50;
         let y1 = 50;
         let x2 = 50;
         let y2 = 150;
         let x3 = 50;
         let y3 = 250;
         let x4 = 50;
-        let y4 = 350;
+        let y4 = 350;*/
         let t0;
         let dt;
         requestAnimationFrame(desenha); //Coloca a função desenha pra rodar
@@ -34,22 +38,27 @@
             ctx.fillRect(0, 0, canvas.width, canvas.height);
             //ctx.fillRect(10, 30, 40, 50); //cria um retângulo na posição x=10, y=30, com 40 pixels de largura e 50 de altura
 
-            //Atualiza estado
-            x1 = x1 + 10*dt; // dt precisa ser sempre levado em conta para a mudança de estado
-            y1 = 50 + 10*Math.cos(t/200);
+            //Atualiza dinâmica dos estados
+            x = x + vx*dt;
+            y = y + vy*dt;
+
+            /*x1 = x1 + 10*dt; // dt precisa ser sempre levado em conta para a mudança de estado
+            y1 = 50 + 1000*Math.cos(t/200)*dt;
 
             x2 = x2 + 10*dt;
-            y2 = 150 + 10* Math.sin(t/200);
+            y2 = 150 + 1000* Math.sin(t/200)*dt;
 
             x3 = x3 + 10*dt;
-            y3 = 250 + 10* Math.tan(t/500);
+            y3 = 250 + 1000* Math.tan(t/500)*dt;
 
             x4 = x4 + 10*dt;
-            y4 = 350 - 10* Math.exp(t/5000);
+            y4 = 350 - 1000* Math.exp(t/5000)*dt;*/
 
             //Desenha Elementos
+            ctx.fillStyle = "yellow";
+            ctx.fillRect(x, y, 20, 20);
 
-            ctx.fillStyle = "red"; //define a cor do retângulo pra branco
+            /*ctx.fillStyle = "red"; //define a cor do retângulo pra branco
             ctx.fillRect(x1, y1, 20, 20);
 
             ctx.fillStyle = "yellow";
@@ -59,12 +68,34 @@
             ctx.fillRect(x3, y3, 20, 20);
 
             ctx.fillStyle = "white";
-            ctx.fillRect(x4, y4, 20, 20);
+            ctx.fillRect(x4, y4, 20, 20);*/
 
             requestAnimationFrame(desenha);
             t0 = t;
         }
         
+        addEventListener("keydown", teclaPressionada);
+
+        //Adiciona controle de velocidades
+        function teclaPressionada(e){ // 'e' de event
+            console.log(e.key);
+            switch (e.key) {
+                case "ArrowUp":
+                    vy = -20;
+                    break;
+                case "ArrowDown":
+                    vy = 20;
+                    break;
+                case "ArrowLeft":
+                    vx = -20;
+                    break;
+                case "ArrowRight":
+                    vx = 20;
+                    break;
+                default:
+                    break;
+            }
+        }
 
     </script>
 </body>
