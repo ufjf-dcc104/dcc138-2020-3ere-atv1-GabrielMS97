@@ -18,6 +18,7 @@
         let vx = 0; //velocidade de x
         let y = 100;
         let vy = 0; //velocidade de y
+        const V = 100;
         /*let x1 = 50;
         let y1 = 50;
         let x2 = 50;
@@ -82,16 +83,16 @@
             console.log(e.key);
             switch (e.key) {
                 case "ArrowUp":
-                    vy = -50;
+                    vy = -V;
                     break;
                 case "ArrowDown":
-                    vy = 50;
+                    vy = V;
                     break;
                 case "ArrowLeft":
-                    vx = -50;
+                    vx = -V;
                     break;
                 case "ArrowRight":
-                    vx = 50;
+                    vx = V;
                     break;
             }
         }
