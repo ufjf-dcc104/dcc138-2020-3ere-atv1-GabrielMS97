@@ -20,6 +20,14 @@
         let y = 100;
         let vy = 0; //velocidade de y
         let ay = 0; //aceleração de y
+
+        let ex = 350;
+        let evx = 0; 
+        let eax = 0; 
+        let ey = 200;
+        let evy = 0; 
+        let eay = 0; 
+
         const K = 100;
         /*let x1 = 50;
         let y1 = 50;
@@ -41,11 +49,20 @@
             ctx.fillRect(0, 0, canvas.width, canvas.height);
             //ctx.fillRect(10, 30, 40, 50); //cria um retângulo na posição x=10, y=30, com 40 pixels de largura e 50 de altura
 
+            //Controladores (Perseguir)
+            eay = 0.5*(y - ey) - 0.2*evy;
+            eax = 0.5*(x - ex) - 0.2*evx;
+
             //Atualiza dinâmica dos estados
             vx = vx + ax*dt;
             x = x + vx*dt;
             vy = vy + ay*dt;
             y = y + vy*dt;
+
+            evx = evx + eax*dt;
+            ex = ex + evx*dt;
+            evy = evy + eay*dt;
+            ey = ey + evy*dt;
 
             /*x1 = x1 + 10*dt; // dt precisa ser sempre levado em conta para a mudança de estado
             y1 = 50 + 1000*Math.cos(t/200)*dt;
@@ -62,6 +79,9 @@
             //Desenha Elementos
             ctx.fillStyle = "yellow";
             ctx.fillRect(x, y, 20, 20);
+
+            ctx.fillStyle = "red";
+            ctx.fillRect(ex, ey, 20, 20);
 
             /*ctx.fillStyle = "red"; //define a cor do retângulo pra branco
             ctx.fillRect(x1, y1, 20, 20);
