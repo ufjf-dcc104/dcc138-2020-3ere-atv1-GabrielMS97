@@ -23,10 +23,9 @@
             y : 100,
             vy : 0, //velocidade de y
             ay : 0, //aceleração de y
-            desenhar: function(){
-                ctx.fillStyle = "yellow";
-                ctx.fillRect(this.x, this.y, 20, 20);
-            }
+            cor : "yellow",
+            desenhar: desenharElemento,
+            mover: moverElemento,
         };
 
         let e = { // Definição do objeto e (inimigo)
@@ -37,16 +36,16 @@
             y : 200,
             vy : 0, 
             ay : 0, 
-            desenhar: function () {
-                ctx.fillStyle = "red";
-                ctx.fillRect(this.x, this.y, 20, 20);
-            }
+            cor : "red",
+            desenhar: desenharElemento,
+            mover: moverElemento,
+            controlar: perseguirAlvo,
         };
-
+        
         const K = 200;
         let t0;
         let dt;
-        
+
         requestAnimationFrame(desenha); //Coloca a função desenha pra rodar
 
         function desenha(t){
@@ -58,26 +57,41 @@
             //ctx.fillRect(10, 30, 40, 50); //cria um retângulo na posição x=10, y=30, com 40 pixels de largura e 50 de altura
 
             //Controladores (Perseguir)
-            e.ay = 0.5*(p.y - e.y) - 0.2*e.vy;
-            e.ax = 0.5*(p.x - e.x) - 0.2*e.vx;
-
+            //e.controlar({x: 250, y: 120});
+            e.controlar(p);
+            
             //Atualiza dinâmica dos estados
-            p.vx = p.vx + p.ax*dt;
-            p.x = p.x + p.vx*dt;
-            p.vy = p.vy + p.ay*dt;
-            p.y = p.y + p.vy*dt;
-
-            e.vx = e.vx + e.ax*dt;
-            e.x = e.x + e.vx*dt;
-            e.vy = e.vy + e.ay*dt;
-            e.y = e.y + e.vy*dt;
+            p.mover();
+            e.mover();
 
             //Desenha Elementos
             p.desenhar();
             e.desenhar();
-
+            
             requestAnimationFrame(desenha);
             t0 = t;
+        }
+
+        function moverElemento(){
+            this.vx = this.vx + this.ax*dt;
+            this.x = this.x + this.vx*dt;
+            this.vy = this.vy + this.ay*dt;
+            this.y = this.y + this.vy*dt;
+        }
+
+        function desenharElemento(){
+            ctx.fillStyle = this.cor;
+            ctx.fillRect(this.x, this.y, 20, 20);
+        }
+
+        function perseguirAlvo(alvo) {
+            this.ay = 0.5*(alvo.y - this.y) - 0.2*this.vy;
+            this.ax = 0.5*(alvo.x - this.x) - 0.2*this.vx;
+        }
+
+        function evitarAlvo(alvo) {
+            this.ay = -0.5*(alvo.y - this.y) - 0.2*this.vy;
+            this.ax = -0.5*(alvo.x - this.x) - 0.2*this.vx;
         }
         
         addEventListener("keydown", teclaPressionada); //Evento de tecla pressionada
@@ -123,6 +137,7 @@
                     break;
             }
         }
+
 
     </script>
 </body>
