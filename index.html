@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DCC138 e.xemplo 01</title>
+    <title>DCC138 exemplo 01</title>
 </head>
 <body>
-    <h1> DCC138 e.xemplo 01 </h1>
+    <h1> DCC138 exemplo 01 </h1>
     <canvas></canvas>
     <p> por Gabriel Santana (2021)</p>
     <script>
@@ -22,10 +22,14 @@
             ax : 0, //aceleração de x
             y : 100,
             vy : 0, //velocidade de y
-            ay : 0 //aceleração de y
+            ay : 0, //aceleração de y
+            desenhar: function(){
+                ctx.fillStyle = "yellow";
+                ctx.fillRect(this.x, this.y, 20, 20);
+            }
         };
 
-        let e = { // Definição do objeto e (enemy)
+        let e = { // Definição do objeto e (inimigo)
             // Estados do quadrado vermelho
             x : 350,
             vx : 0,
@@ -33,19 +37,16 @@
             y : 200,
             vy : 0, 
             ay : 0, 
+            desenhar: function () {
+                ctx.fillStyle = "red";
+                ctx.fillRect(this.x, this.y, 20, 20);
+            }
         };
 
         const K = 200;
-        /*let x1 = 50;
-        let y1 = 50;
-        let x2 = 50;
-        let y2 = 150;
-        let x3 = 50;
-        let y3 = 250;
-        let x4 = 50;
-        let y4 = 350;*/
         let t0;
         let dt;
+        
         requestAnimationFrame(desenha); //Coloca a função desenha pra rodar
 
         function desenha(t){
@@ -71,36 +72,9 @@
             e.vy = e.vy + e.ay*dt;
             e.y = e.y + e.vy*dt;
 
-            /*x1 = x1 + 10*dt; // dt precisa ser sempre levado em conta para a mudança de estado
-            y1 = 50 + 1000*Math.cos(t/200)*dt;
-
-            x2 = x2 + 10*dt;
-            y2 = 150 + 1000* Math.sin(t/200)*dt;
-
-            x3 = x3 + 10*dt;
-            y3 = 250 + 1000* Math.tan(t/500)*dt;
-
-            x4 = x4 + 10*dt;
-            y4 = 350 - 1000* Math.e.xp(t/5000)*dt;*/
-
             //Desenha Elementos
-            ctx.fillStyle = "yellow";
-            ctx.fillRect(p.x, p.y, 20, 20);
-
-            ctx.fillStyle = "red";
-            ctx.fillRect(e.x, e.y, 20, 20);
-
-            /*ctx.fillStyle = "red"; //define a cor do retângulo pra branco
-            ctx.fillRect(x1, y1, 20, 20);
-
-            ctx.fillStyle = "yellow";
-            ctx.fillRect(x2, y2, 20, 20);
-
-            ctx.fillStyle = "#008B8B";
-            ctx.fillRect(x3, y3, 20, 20);
-
-            ctx.fillStyle = "white";
-            ctx.fillRect(x4, y4, 20, 20);*/
+            p.desenhar();
+            e.desenhar();
 
             requestAnimationFrame(desenha);
             t0 = t;
@@ -132,19 +106,19 @@
             console.log(event.key);
             switch (event.key) {
                 case "ArrowUp":
-                    p.vy = 0;
+                    //p.vy = 0;
                     p.ay = 0;
                     break;
                 case "ArrowDown":
-                    p.vy = 0;
+                    //p.vy = 0;
                     p.ay = 0;
                     break;
                 case "ArrowLeft":
-                    p.vx = 0;
+                    //p.vx = 0;
                     p.ax = 0;
                     break;
                 case "ArrowRight":
-                    p.vx = 0;
+                    //p.vx = 0;
                     p.ax = 0;
                     break;
             }
