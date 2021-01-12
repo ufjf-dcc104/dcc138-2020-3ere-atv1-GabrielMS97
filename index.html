@@ -3,15 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DCC138 Exemplo 01</title>
+    <title>DCC138 e.xemplo 01</title>
 </head>
 <body>
-    <h1> DCC138 Exemplo 01 </h1>
+    <h1> DCC138 e.xemplo 01 </h1>
     <canvas></canvas>
     <p> por Gabriel Santana (2021)</p>
     <script>
         let canvas = document.querySelector("canvas"); //captura do canvas
-        let ctx = canvas.getContext("2d"); //cria contexto 2d
+        let ctx = canvas.getContext("2d"); //cria conte.xto 2d
         canvas.width = 880;
         canvas.height = 420;
 
@@ -25,17 +25,17 @@
             ay : 0 //aceleração de y
         };
 
-        
+        let e = { // Definição do objeto e (enemy)
+            // Estados do quadrado vermelho
+            x : 350,
+            vx : 0,
+            ax : 0, 
+            y : 200,
+            vy : 0, 
+            ay : 0, 
+        };
 
-        // Estados do quadrado vermelho
-        let ex = 350;
-        let evx = 0; 
-        let eax = 0; 
-        let ey = 200;
-        let evy = 0; 
-        let eay = 0; 
-
-        const K = 100;
+        const K = 200;
         /*let x1 = 50;
         let y1 = 50;
         let x2 = 50;
@@ -57,8 +57,8 @@
             //ctx.fillRect(10, 30, 40, 50); //cria um retângulo na posição x=10, y=30, com 40 pixels de largura e 50 de altura
 
             //Controladores (Perseguir)
-            eay = 0.5*(p.y - ey) - 0.2*evy;
-            eax = 0.5*(p.x - ex) - 0.2*evx;
+            e.ay = 0.5*(p.y - e.y) - 0.2*e.vy;
+            e.ax = 0.5*(p.x - e.x) - 0.2*e.vx;
 
             //Atualiza dinâmica dos estados
             p.vx = p.vx + p.ax*dt;
@@ -66,10 +66,10 @@
             p.vy = p.vy + p.ay*dt;
             p.y = p.y + p.vy*dt;
 
-            evx = evx + eax*dt;
-            ex = ex + evx*dt;
-            evy = evy + eay*dt;
-            ey = ey + evy*dt;
+            e.vx = e.vx + e.ax*dt;
+            e.x = e.x + e.vx*dt;
+            e.vy = e.vy + e.ay*dt;
+            e.y = e.y + e.vy*dt;
 
             /*x1 = x1 + 10*dt; // dt precisa ser sempre levado em conta para a mudança de estado
             y1 = 50 + 1000*Math.cos(t/200)*dt;
@@ -81,14 +81,14 @@
             y3 = 250 + 1000* Math.tan(t/500)*dt;
 
             x4 = x4 + 10*dt;
-            y4 = 350 - 1000* Math.exp(t/5000)*dt;*/
+            y4 = 350 - 1000* Math.e.xp(t/5000)*dt;*/
 
             //Desenha Elementos
             ctx.fillStyle = "yellow";
             ctx.fillRect(p.x, p.y, 20, 20);
 
             ctx.fillStyle = "red";
-            ctx.fillRect(ex, ey, 20, 20);
+            ctx.fillRect(e.x, e.y, 20, 20);
 
             /*ctx.fillStyle = "red"; //define a cor do retângulo pra branco
             ctx.fillRect(x1, y1, 20, 20);
@@ -110,9 +110,9 @@
         addEventListener("keyup", teclaSolta); // Evento de tecla solta
 
         //Adiciona controle de velocidades
-        function teclaPressionada(e){ // 'e' de event
-            console.log(e.key);
-            switch (e.key) {
+        function teclaPressionada(event){ // 'e' de event
+            console.log(event.key);
+            switch (event.key) {
                 case "ArrowUp":
                     p.ay = -K;
                     break;
@@ -128,9 +128,9 @@
             }
         }
 
-        function teclaSolta(e){ 
-            console.log(e.key);
-            switch (e.key) {
+        function teclaSolta(event){ 
+            console.log(event.key);
+            switch (event.key) {
                 case "ArrowUp":
                     p.vy = 0;
                     p.ay = 0;
