@@ -14,13 +14,20 @@
         let ctx = canvas.getContext("2d"); //cria contexto 2d
         canvas.width = 880;
         canvas.height = 420;
-        let x = 50;
-        let vx = 0; //velocidade de x
-        let ax = 0; //aceleração de x
-        let y = 100;
-        let vy = 0; //velocidade de y
-        let ay = 0; //aceleração de y
 
+        let p = {  // Definição do objeto p (personagem)
+            // Estados do quadrado amarelo
+            x : 50,
+            vx : 0, //velocidade de x
+            ax : 0, //aceleração de x
+            y : 100,
+            vy : 0, //velocidade de y
+            ay : 0 //aceleração de y
+        };
+
+        
+
+        // Estados do quadrado vermelho
         let ex = 350;
         let evx = 0; 
         let eax = 0; 
@@ -50,14 +57,14 @@
             //ctx.fillRect(10, 30, 40, 50); //cria um retângulo na posição x=10, y=30, com 40 pixels de largura e 50 de altura
 
             //Controladores (Perseguir)
-            eay = 0.5*(y - ey) - 0.2*evy;
-            eax = 0.5*(x - ex) - 0.2*evx;
+            eay = 0.5*(p.y - ey) - 0.2*evy;
+            eax = 0.5*(p.x - ex) - 0.2*evx;
 
             //Atualiza dinâmica dos estados
-            vx = vx + ax*dt;
-            x = x + vx*dt;
-            vy = vy + ay*dt;
-            y = y + vy*dt;
+            p.vx = p.vx + p.ax*dt;
+            p.x = p.x + p.vx*dt;
+            p.vy = p.vy + p.ay*dt;
+            p.y = p.y + p.vy*dt;
 
             evx = evx + eax*dt;
             ex = ex + evx*dt;
@@ -78,7 +85,7 @@
 
             //Desenha Elementos
             ctx.fillStyle = "yellow";
-            ctx.fillRect(x, y, 20, 20);
+            ctx.fillRect(p.x, p.y, 20, 20);
 
             ctx.fillStyle = "red";
             ctx.fillRect(ex, ey, 20, 20);
@@ -107,16 +114,16 @@
             console.log(e.key);
             switch (e.key) {
                 case "ArrowUp":
-                    ay = -K;
+                    p.ay = -K;
                     break;
                 case "ArrowDown":
-                    ay = K;
+                    p.ay = K;
                     break;
                 case "ArrowLeft":
-                    ax = -K;
+                    p.ax = -K;
                     break;
                 case "ArrowRight":
-                    ax = K;
+                    p.ax = K;
                     break;
             }
         }
@@ -125,20 +132,20 @@
             console.log(e.key);
             switch (e.key) {
                 case "ArrowUp":
-                    vy = 0;
-                    ay = 0;
+                    p.vy = 0;
+                    p.ay = 0;
                     break;
                 case "ArrowDown":
-                    vy = 0;
-                    ay = 0;
+                    p.vy = 0;
+                    p.ay = 0;
                     break;
                 case "ArrowLeft":
-                    vx = 0;
-                    ax = 0;
+                    p.vx = 0;
+                    p.ax = 0;
                     break;
                 case "ArrowRight":
-                    vx = 0;
-                    ax = 0;
+                    p.vx = 0;
+                    p.ax = 0;
                     break;
             }
         }
