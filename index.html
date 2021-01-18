@@ -24,6 +24,8 @@
             y : 100,
             vy : 0, //velocidade de y
             ay : 0, //aceleração de y
+            w : 40, //largura
+            h : 15, //altura
             cor : "yellow",
             desenhar: desenharElemento,
             mover: moverElemento,
@@ -39,6 +41,8 @@
                 y : canvas.height * (Math.random()),
                 vy : 0, 
                 ay : 0, 
+                w: 15,
+                h: 15,
                 cor : "red",
                 desenhar: desenharElemento,
                 mover: moverElemento,
@@ -54,6 +58,8 @@
             y : 150,
             vy : 0, 
             ay : 0, 
+            w: 5,
+            h: 5,
             cor : "blue",
             desenhar: desenharElemento,
             mover: moverElemento,
@@ -85,8 +91,7 @@
             //e.controlar({x: 250, y: 120});
             
             p.mover();
-            p.desenhar();
-
+            
             for (let s = 0; s < sprites.length; s++) {
                 const sprite = sprites[s];
                 sprite.controlar?.(p);
@@ -100,7 +105,7 @@
                     o.y = -1000;
                     o.vx = 0;
                     o.ax = 0;
-
+                    
                     sprite.x = 1000;
                     sprite.vx = 100;
                     sprite.ax = 0;
@@ -113,15 +118,16 @@
                     pontos -= 3;
                 }
             }
+            p.desenhar();
             
             ctx.fillStyle = "green";
             ctx.font = "20px Impact";
             ctx.fillText(pontos, 30, 30);
-
+            
             requestAnimationFrame(desenha);
             t0 = t;
         }
-
+        
         function moverElemento(){
             this.vx = this.vx + this.ax*dt;
             this.x = this.x + this.vx*dt;
@@ -131,7 +137,7 @@
 
         function desenharElemento(){
             ctx.fillStyle = this.cor;
-            ctx.fillRect(this.x, this.y, 20, 20);
+            ctx.fillRect(this.x, this.y, this.w, this.h);
         }
 
         function perseguirAlvo(alvo) {
@@ -184,6 +190,7 @@
                 case "ArrowRight":
                     //p.vx = 0;
                     p.ax = 0;
+                    break;
                 case " ":
                     if(o.x === -1000){
                         o.x = p.x;
@@ -197,10 +204,10 @@
 
         function colidiram(A, B) {
             return !(
-                (A.x > B.x + 20) ||
-                (A.x + 20 < B.x) ||
-                (A.y > B.y + 20) ||
-                (A.y + 20 < B.y) 
+                (A.x > B.x + B.w) ||
+                (A.x + A.w < B.x) ||
+                (A.y > B.y + B.h) ||
+                (A.y + A.h < B.y) 
             );
         }
 
